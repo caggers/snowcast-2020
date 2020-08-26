@@ -1,17 +1,20 @@
 import * as React from "react"
+import { useEffect } from "react"
 import ReactDOM from "react-dom"
+import { getData } from "./util"
 
-interface IProps {
-  name: string;
-}
-
-const App: React.FunctionComponent<IProps> = props => {
-	const {name} = props
+const App: React.FunctionComponent = () => {
+	useEffect(() => {
+		async function getTheData() {
+			console.log(await getData("snowreport", 222036))
+		}
+		getTheData()
+	}, [])
 
 	return (
-		<div>Hello {name}</div>
+		<div>Hello</div>
 	)
 }
 
 const mountNode = document.getElementById("app")
-ReactDOM.render(<App name="Jane" />, mountNode)
+ReactDOM.render(<App />, mountNode)
