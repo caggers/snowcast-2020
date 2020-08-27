@@ -20,17 +20,17 @@ export function getData(type, resort_id) {
 	})
 }
 
-export function getForecast(resort_id, num_days, interval) {
-	const URL = `${API}/resortforecast/${resort_id}`
-	return axios.get(URL, {
-		headers: HEADERS,
-		params: {
-			num_of_days: num_days,
-			app_id: APP_ID,
-			app_key: APP_KEY,
-		},
-	})
-}
+// export function getForecast(resort_id, num_days, interval) {
+// 	const URL = `${API}/resortforecast/${resort_id}`
+// 	return axios.get(URL, {
+// 		headers: HEADERS,
+// 		params: {
+// 			num_of_days: num_days,
+// 			app_id: APP_ID,
+// 			app_key: APP_KEY,
+// 		},
+// 	})
+// }
 
 // export const OPTIONS = [
 // 	{
