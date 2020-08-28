@@ -1,4 +1,9 @@
 {
-	"presets": ["@babel/preset-react"],
-	"plugins": ["babel-plugin-styled-components"]
+	"presets": [
+		"@babel/preset-react"
+	],
+	"plugins": [
+		"babel-plugin-styled-components",
+		"@babel/plugin-transform-runtime"
+	]
 }
