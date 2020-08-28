@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios from "axios"
 
 const API = process.env.REACT_APP_WEATHER_API
@@ -9,7 +8,7 @@ const HEADERS = {
 	Accept: "application/json",
 }
 
-export function getData(type, resort_id) {
+export function getData(type: string, resort_id: number) {
 	const URL = `${API}/${type}/${resort_id}?`
 	return axios.get(URL, {
 		headers: HEADERS,

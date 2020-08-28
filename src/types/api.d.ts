@@ -1,4 +1,4 @@
-declare interface ISnowReportResponse {
+export interface ISnowReportResponse {
 	conditions: string
 	lastsnow: string
 	lastsnow_cm: number

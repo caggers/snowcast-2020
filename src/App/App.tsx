@@ -1,8 +1,9 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import { getData } from "../util"
+import { getData } from "../util/util"
 import { AxiosResponse } from "axios"
 import styled from "styled-components"
+import { ISnowReportResponse } from "../types/api"
 
 const Background = styled.div`
   background-image: linear-gradient(-45deg, #4158D0, #C850C0, #FFCC70);
