@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Background = styled.div`
-  background-image: linear-gradient(rgba(238, 238, 238, 0.5), rgba(238, 238, 238, 0.5));
+  background: rgba(238, 238, 238, 0.5);
   width: 75vw;
   height: auto;
 	margin: 10vh auto;
@@ -23,7 +23,6 @@ const Card = (props: Props) => {
 			<Background>
 				<div>Hello {snowReport.resortname}</div>
 			</Background>
-
 		</>
 	)
 }
