@@ -37,8 +37,6 @@ const initialState: ISnowReportData = {
 	uppersnow_in: 0,
 }
 
-
-
 const App: React.FunctionComponent = () => {
 	const [snowReport, setSnowReport] = useState<ISnowReportData>(initialState)
 
