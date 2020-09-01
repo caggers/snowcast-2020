@@ -18,27 +18,8 @@ const Background = styled.div`
   left: 0;
 `
 
-const initialState: ISnowReportData = {
-	conditions: "",
-	lastsnow: "",
-	lastsnow_cm: 0,
-	lastsnow_in: 0,
-	lowersnow_cm: 0,
-	lowersnow_in: 0,
-	newsnow_cm: 0,
-	newsnow_in: 0,
-	pctopen: 0,
-	reportdate: "",
-	reporttime: "",
-	resortcountry: "",
-	resortid: 0,
-	resortname: "Westendorf",
-	uppersnow_cm: 0,
-	uppersnow_in: 0,
-}
-
 const App: React.FunctionComponent = () => {
-	const [snowReport, setSnowReport] = useState<ISnowReportData>(initialState)
+	const [snowReport, setSnowReport] = useState<ISnowReportData | null>(null)
 
 	useEffect(() => {
 		const getInitialSnowReport = async () => {
@@ -47,15 +28,18 @@ const App: React.FunctionComponent = () => {
 			setSnowReport(data)
 		}
 		getInitialSnowReport()
+
 	}, [])
 
 	return (
 		<>
-			<ThemeProvider theme={theme}>
-				<Background>
-					<Card snowReport={snowReport} />
-				</Background>
-			</ThemeProvider>
+			{snowReport !== null &&
+				<ThemeProvider theme={theme}>
+					<Background>
+						<Card snowReport={snowReport} />
+					</Background>
+				</ThemeProvider>
+			}
 		</>
 	)
 }

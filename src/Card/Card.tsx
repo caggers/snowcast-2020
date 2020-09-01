@@ -1,6 +1,7 @@
 import * as React from "react"
 import { ISnowReportData } from '../types/api'
 import styled from 'styled-components'
+import Select from "../Select/Select"
 
 type Props = {
 	snowReport: ISnowReportData
@@ -35,13 +36,14 @@ const GridItemB = styled.div`
 
 const Card = (props: Props) => {
 	const { snowReport } = props
+	const location = { resortname: snowReport.resortname, resortid: snowReport.resortid }
 
 	return (
 		<>
 			<Background>
 				<Grid>
 					<GridItemA>
-						<div></div>
+						<Select location={location} />
 					</GridItemA>
 					<GridItemB>
 						<div></div>
