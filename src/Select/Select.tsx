@@ -1,5 +1,6 @@
 import * as React from "react"
-import { useState, useContext, useEffect, useLayoutEffect } from "react"
+import { useState } from "react"
+import styled from 'styled-components'
 
 export const OPTIONS = [
 	{
@@ -31,6 +32,17 @@ type IProps = {
 	}
 }
 
+const StyledSelect = styled.select`
+	appearance: none;
+  background-color: transparent;
+  padding: 0 0.5em 0 0;
+  margin: 0;
+	color: white;
+	border: none;
+	border-bottom: 1px solid #EEE;
+	font-size: 3rem;
+`
+
 const Select = (props: IProps) => {
 	const { location } = props
 	const [value, setValue] = useState(location.resortname)
@@ -41,7 +53,7 @@ const Select = (props: IProps) => {
 	}
 
 	return (
-		<select onChange={(e) => handleChange(e)} value={value}>
+		<StyledSelect onChange={(e) => handleChange(e)} value={value}>
 			{OPTIONS.map((option) =>
 				<option
 					key={option.resortid}
@@ -50,7 +62,7 @@ const Select = (props: IProps) => {
 					{option.resortname}
 				</option>
 			)}
-		</select>
+		</StyledSelect>
 	)
 }
 
