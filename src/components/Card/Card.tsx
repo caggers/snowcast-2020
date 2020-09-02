@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ISnowReportData } from '../types/api'
+import { ISnowReportData } from '../../types/api'
 import styled from 'styled-components'
 import Select from "../Select/Select"
 import Text from "../Text/Text"

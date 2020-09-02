@@ -19,6 +19,8 @@ export function getData(type: string, resort_id: number) {
 	})
 }
 
+
+
 export async function buildContext() {
 	return {
 		222036: await getData("snowreport", 222036),

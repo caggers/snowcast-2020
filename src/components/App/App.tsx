@@ -1,10 +1,10 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import { getData } from "../util/util"
+import { getData } from "../../util/util"
 import { AxiosResponse } from "axios"
 import styled, { ThemeProvider } from "styled-components"
-import { ISnowReportData } from "../types/api"
-import { theme } from "../util/themes"
+import { ISnowReportData } from "../../types/api"
+import { theme } from "../../util/themes"
 import Card from "../Card/Card"
 
 const Background = styled.div`
