@@ -52,7 +52,7 @@ const Card = (props: Props) => {
 						<Text text={percentageOpen} />
 					</GridItemA>
 					<GridItemB>
-						<<div></div>>
+						<div></div>
 					</GridItemB>
 
 				</Grid>
