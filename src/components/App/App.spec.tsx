@@ -15,6 +15,6 @@ describe("App", () => {
 
 	it("renders the App component correctly", async () => {
 		const { findByText } = render(<App />)
-		await findByText("Hello Westendorf")
+		await findByText("Westendorf")
 	})
 })

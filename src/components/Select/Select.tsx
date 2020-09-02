@@ -53,7 +53,11 @@ const Select = (props: IProps) => {
 	}
 
 	return (
-		<StyledSelect onChange={(e) => handleChange(e)} value={value}>
+		<StyledSelect
+			onChange={(e) => handleChange(e)}
+			value={value}
+			data-testid="select"
+		>
 			{OPTIONS.map((option) =>
 				<option
 					key={option.resortid}
