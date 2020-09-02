@@ -16,6 +16,8 @@ const Background = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+	color: white;
+	font-family: Arial;
 `
 
 const App: React.FunctionComponent = () => {

@@ -35,11 +35,11 @@ type IProps = {
 const StyledSelect = styled.select`
 	appearance: none;
   background-color: transparent;
-  padding: 0 0.5em 0 0;
+  padding: 0 1em 0 0;
   margin: 0;
 	color: white;
 	border: none;
-	border-bottom: 1px solid #EEE;
+	border-bottom: 1px solid rgba(238, 238, 238, 0.5);
 	font-size: 3rem;
 `
 
