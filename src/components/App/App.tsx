@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import { getData } from "../../util/util"
+import { getData, buildTextArray } from "../../util/util"
 import { AxiosResponse } from "axios"
 import styled, { ThemeProvider } from "styled-components"
 import { ISnowReportData } from "../../types/api"
@@ -22,7 +22,6 @@ const Background = styled.div`
 
 const App: React.FunctionComponent = () => {
 	const [snowReport, setSnowReport] = useState<ISnowReportData | null>(null)
-
 	useEffect(() => {
 		const getInitialSnowReport = async () => {
 			const report: AxiosResponse = await getData("snowreport", 222036)
@@ -33,12 +32,20 @@ const App: React.FunctionComponent = () => {
 
 	}, [])
 
+	const [panelText, setPanelText] = useState<any>(null)
+	useEffect(() => {
+		if (snowReport !== null) {
+			setPanelText(buildTextArray(snowReport))
+		}
+
+	}, [snowReport])
+
 	return (
 		<>
-			{snowReport !== null &&
+			{snowReport !== null && panelText !== null &&
 				<ThemeProvider theme={theme}>
 					<Background>
-						<Card snowReport={snowReport} />
+						<Card snowReport={snowReport} panelText={panelText} />
 					</Background>
 				</ThemeProvider>
 			}

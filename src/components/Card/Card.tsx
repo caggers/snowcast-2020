@@ -3,9 +3,11 @@ import { ISnowReportData } from '../../types/api'
 import styled from 'styled-components'
 import Select from "../Select/Select"
 import Text from "../Text/Text"
+import Panel from "../Panel/Panel"
 
 type Props = {
-	snowReport: ISnowReportData
+	snowReport: ISnowReportData,
+	panelText: Array<{ label: string, text: string }>
 }
 
 const Background = styled.div`
@@ -38,7 +40,7 @@ const GridItemB = styled.div`
 `
 
 const Card = (props: Props) => {
-	const { snowReport } = props
+	const { snowReport, panelText } = props
 	const location = { resortname: snowReport.resortname, resortid: snowReport.resortid }
 	const percentageOpen = `${snowReport.pctopen}% of the Runs are open`
 
@@ -52,7 +54,7 @@ const Card = (props: Props) => {
 						<Text text={percentageOpen} />
 					</GridItemA>
 					<GridItemB>
-						<div></div>
+						<Panel panelText={panelText} />
 					</GridItemB>
 
 				</Grid>
