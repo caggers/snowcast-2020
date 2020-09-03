@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Select, { OPTIONS } from "../Select/Select"
 import Text from "../Text/Text"
 import Panel from "../Panel/Panel"
-import Autocomplete from "../Autocomplete/Autocomplete"
+import Input from "../Input/Input"
 
 type Props = {
 	snowReport: ISnowReportData,
@@ -51,7 +51,7 @@ const Card = (props: Props) => {
 			<Background>
 				<Grid>
 					<GridItemA>
-						<Autocomplete options={OPTIONS} />
+						<Input options={OPTIONS} />
 						<Text text={snowReport.conditions} />
 						<Text text={percentageOpen} />
 					</GridItemA>
