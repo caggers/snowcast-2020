@@ -35,7 +35,8 @@
 	"scripts": {
 		"start": "parcel src/index.html",
 		"build": "parcel build src/index.html",
-		"test": "jest"
+		"test": "jest",
+		"jest:coverage": "npx jest --coverage"
 	},
 	"author": "Gemma Cagney",
 	"license": "ISC"

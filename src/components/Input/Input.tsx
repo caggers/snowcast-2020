@@ -55,7 +55,7 @@ const Input = (props: Props) => {
 	return (
 		<Wrapper>
 			<StyledInput
-				className="search-box"
+				data-testid="location-input"
 				onClick={(e) => onClickInput(e)}
 				readOnly
 				type="text"
