@@ -1,7 +1,6 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
-import styled from "styled-components"
-import { ISnowReportData } from '../../types/api'
+import * as React from 'react'
+import styled from 'styled-components'
+import Text from './Text'
 
 const StyledPanel = styled.div`
 	font-size: 1.5em;
@@ -9,22 +8,18 @@ const StyledPanel = styled.div`
 `
 
 type Props = {
-	panelText: Array<{ label: string, text: string }>
+	panelText: Array<{ label: string; text: string }>
 }
 
 const Panel = (props: Props) => {
 	const { panelText } = props
 	return (
 		<>
-			{panelText.map(item => (
-				<div key={item.label}>
-					<label>{item.label}</label>
-					<div>{item.text}</div>
-				</div>
+			{panelText.map((item) => (
+				<Text item={item} key={item.label} />
 			))}
 		</>
 	)
 }
-
 
 export default Panel
