@@ -1,9 +1,10 @@
 import * as React from "react"
 import { ISnowReportData } from '../../types/api'
 import styled from 'styled-components'
-import Select from "../Select/Select"
+import Select, { OPTIONS } from "../Select/Select"
 import Text from "../Text/Text"
 import Panel from "../Panel/Panel"
+import Autocomplete from "../Autocomplete/Autocomplete"
 
 type Props = {
 	snowReport: ISnowReportData,
@@ -18,6 +19,7 @@ const Background = styled.div`
 	margin: 10vh auto;
 	border-radius: 0.5rem;
 	border: 2px solid rgba(238, 238, 238, 0.5);
+	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.5);
 `
 
 const Grid = styled.div`
@@ -49,7 +51,7 @@ const Card = (props: Props) => {
 			<Background>
 				<Grid>
 					<GridItemA>
-						<Select location={location} />
+						<Autocomplete options={OPTIONS} />
 						<Text text={snowReport.conditions} />
 						<Text text={percentageOpen} />
 					</GridItemA>

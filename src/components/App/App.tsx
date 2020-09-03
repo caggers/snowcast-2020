@@ -17,7 +17,7 @@ const Background = styled.div`
   top: 0;
   left: 0;
 	color: white;
-	font-family: Arial;
+	font-family: 'Public Sans', sans-serif;
 `
 
 const App: React.FunctionComponent = () => {
