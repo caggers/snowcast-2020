@@ -1,6 +1,6 @@
-import * as React from "react"
-import { MouseEvent } from "react"
-import { useState, useRef, useEffect, MutableRefObject } from "react"
+import * as React from 'react'
+import { MouseEvent } from 'react'
+import { useState, useRef, useEffect, MutableRefObject } from 'react'
 import styled from 'styled-components'
 
 type option = {
@@ -23,7 +23,7 @@ const StyledInput = styled.input`
 	color: white;
 	cursor: pointer;
 	font-size: 2rem;
-  background-color: transparent;
+	background-color: transparent;
 `
 
 const Input = (props: Props) => {
@@ -40,10 +40,10 @@ const Input = (props: Props) => {
 	}
 
 	const onClickDropdown = (e: MouseEvent) => {
-		const target = (e.target as HTMLLIElement)
+		const target = e.target as HTMLLIElement
 		if (ref.current.contains(target)) {
-			const filteredOptionArr = options.filter(option =>
-				option.resortname === target.innerHTML
+			const filteredOptionArr = options.filter(
+				(option) => option.resortname === target.innerHTML
 			)
 			setFilteredOption(filteredOptionArr)
 			setValue(filteredOptionArr[0].resortname)
@@ -61,13 +61,13 @@ const Input = (props: Props) => {
 				type="text"
 				value={value}
 			/>
-			{showDropdown &&
+			{showDropdown && (
 				<Dropdown
 					onClick={(e) => onClickDropdown(e)}
 					options={options}
 					ref={ref}
 				/>
-			}
+			)}
 		</Wrapper>
 	)
 }
@@ -76,43 +76,41 @@ const StyledDropdown = styled.ul`
 	border-radius: 0.5rem;
 	background-color: rgba(238, 238, 238, 1);
 	margin: 0;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  min-width: 160px;
-  padding: 12px 16px;
-  position: absolute;
-  z-index: 1;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	min-width: 160px;
+	padding: 12px 16px;
+	position: absolute;
+	z-index: 1;
 	color: black;
-	list-style:none;
-	>li:hover {
+	list-style: none;
+	> li:hover {
 		background: white;
 	}
 `
 
-const Dropdown = React.forwardRef((props: { options: Array<option>, onClick: (e: any) => void }, ref: any) => {
-	const { options, onClick } = props
+const Dropdown = React.forwardRef(
+	(props: { options: Array<option>; onClick: (e: any) => void }, ref: any) => {
+		const { options, onClick } = props
 
-	useEffect(() => {
-		document.addEventListener('click', clickListener)
-		return () => {
-			document.removeEventListener('click', clickListener)
+		useEffect(() => {
+			document.addEventListener('click', clickListener)
+			return () => {
+				document.removeEventListener('click', clickListener)
+			}
+		}, [])
+
+		const clickListener = (e: globalThis.MouseEvent) => {
+			onClick(e)
 		}
-	}, [])
 
-	const clickListener = (e: globalThis.MouseEvent) => {
-		onClick(e)
+		return (
+			<StyledDropdown ref={ref} data-testid="dropdown">
+				{options.map((item) => (
+					<li key={item.resortid}>{item.resortname}</li>
+				))}
+			</StyledDropdown>
+		)
 	}
-
-	return (
-		<StyledDropdown ref={ref}>
-			{options.map(item => (
-				<li
-					key={item.resortid}
-				>
-					{item.resortname}
-				</li>
-			))}
-		</StyledDropdown>
-	)
-})
+)
 
 export default Input
