@@ -1,14 +1,21 @@
 import * as React from "react"
+import { useMemo } from "react"
 import { ISnowReportData } from '../../types/api'
 import styled from 'styled-components'
-import Select, { OPTIONS } from "../Select/Select"
+import { OPTIONS } from "../../util/util"
 import Text from "../Text/Text"
 import Panel from "../Panel/Panel"
 import Input from "../Input/Input"
 
+type option = {
+	resortname: string
+	resortid: number
+}
+
 type Props = {
 	snowReport: ISnowReportData,
 	panelText: Array<{ label: string, text: string }>
+	handleClickOption: (option: option) => Promise<void>,
 }
 
 const Background = styled.div`
@@ -42,16 +49,21 @@ const GridItemB = styled.div`
 `
 
 const Card = (props: Props) => {
-	const { snowReport, panelText } = props
-	const location = { resortname: snowReport.resortname, resortid: snowReport.resortid }
+	const { snowReport, panelText, handleClickOption } = props
+	const selected = { resortname: snowReport.resortname, resortid: snowReport.resortid }
 	const percentageOpen = `${snowReport.pctopen}% of the Runs are open`
+	const dropdownOptions = useMemo(() => OPTIONS, [])
 
 	return (
 		<>
 			<Background>
 				<Grid>
 					<GridItemA>
-						<Input options={OPTIONS} />
+						<Input
+							options={dropdownOptions}
+							selected={selected}
+							handleClickOption={handleClickOption}
+						/>
 						<Text text={snowReport.conditions} />
 						<Text text={percentageOpen} />
 					</GridItemA>

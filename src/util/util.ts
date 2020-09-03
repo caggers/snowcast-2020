@@ -46,3 +46,26 @@ export function buildTextArray(snowReport: ISnowReportData) {
 		newSnow, upperMountain, lowerMountain, lastSnowedDate, lastSnowedAmount, reportDate, reportTime
 	]
 }
+
+export const OPTIONS = [
+	{
+		resortname: "Westendorf",
+		resortid: 222036
+	},
+	{
+		resortname: "Kitzbuhel",
+		resortid: 222013
+	},
+	{
+		resortname: "Ellmau",
+		resortid: 222023
+	},
+	// {
+	// 	value: "Scheffau",
+	// 	id: 54883634
+	// },
+	{
+		resortname: "Saalbach",
+		resortid: 222018
+	}
+]

@@ -40,12 +40,23 @@ const App: React.FunctionComponent = () => {
 
 	}, [snowReport])
 
+
+	const handleClickOption = async (option: any) => {
+		const report: AxiosResponse = await getData("snowreport", option.resortid)
+		const data: ISnowReportData = report.data
+		setSnowReport(data)
+	}
+
 	return (
 		<>
 			{snowReport !== null && panelText !== null &&
 				<ThemeProvider theme={theme}>
 					<Background>
-						<Card snowReport={snowReport} panelText={panelText} />
+						<Card
+							snowReport={snowReport}
+							panelText={panelText}
+							handleClickOption={handleClickOption}
+						/>
 					</Background>
 				</ThemeProvider>
 			}

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { MouseEvent } from "react"
-import { useState, useRef, useEffect, useCallback, MutableRefObject } from "react"
+import { useState, useRef, useEffect, MutableRefObject } from "react"
 import styled from 'styled-components'
 
 type option = {
@@ -10,6 +10,8 @@ type option = {
 
 type Props = {
 	options: Array<option>
+	selected: option
+	handleClickOption: (option: option) => Promise<void>
 }
 
 const Wrapper = styled.div`
@@ -25,39 +27,45 @@ const StyledInput = styled.input`
 `
 
 const Input = (props: Props) => {
-	const { options } = props
+	const { options, selected, handleClickOption } = props
+	const ref = useRef() as MutableRefObject<HTMLOListElement>
 
 	const [filteredOption, setFilteredOption] = useState<Array<option> | []>([])
 	const [showDropdown, setShowDropdown] = useState(false)
-	const [value, setValue] = useState(options[0].resortname)
+	const [value, setValue] = useState(selected.resortname)
 
-	const onClick = (event: MouseEvent<HTMLInputElement>) => {
+	const onClickInput = (event: MouseEvent<HTMLInputElement>) => {
 		setFilteredOption([])
 		setShowDropdown(true)
 	}
 
-	const onClickOption = (string: string) => {
-		const filteredOption = options.filter(option =>
-			option.resortname === string
-		)
-		setFilteredOption(filteredOption)
+	const onClickDropdown = (e: MouseEvent) => {
+		const target = (e.target as HTMLLIElement)
+		if (ref.current.contains(target)) {
+			const filteredOptionArr = options.filter(option =>
+				option.resortname === target.innerHTML
+			)
+			setFilteredOption(filteredOptionArr)
+			setValue(filteredOptionArr[0].resortname)
+			handleClickOption(filteredOptionArr[0])
+		}
 		setShowDropdown(false)
-		setValue(string)
 	}
 
 	return (
 		<Wrapper>
 			<StyledInput
 				className="search-box"
-				onClick={(e) => onClick(e)}
+				onClick={(e) => onClickInput(e)}
 				readOnly
 				type="text"
 				value={value}
 			/>
 			{showDropdown &&
 				<Dropdown
-					onClickOption={(e) => onClickOption(e)}
+					onClick={(e) => onClickDropdown(e)}
 					options={options}
+					ref={ref}
 				/>
 			}
 		</Wrapper>
@@ -80,9 +88,8 @@ const StyledDropdown = styled.ul`
 	}
 `
 
-const Dropdown = (props: { options: Array<option>, onClickOption: (e: any) => void }) => {
-	const { options, onClickOption } = props
-	const ref = useRef() as MutableRefObject<HTMLOListElement>
+const Dropdown = React.forwardRef((props: { options: Array<option>, onClick: (e: any) => void }, ref: any) => {
+	const { options, onClick } = props
 
 	useEffect(() => {
 		document.addEventListener('click', clickListener)
@@ -92,12 +99,7 @@ const Dropdown = (props: { options: Array<option>, onClickOption: (e: any) => vo
 	}, [])
 
 	const clickListener = (e: globalThis.MouseEvent) => {
-		if (ref.current.contains(e.target as Node)) {
-			const innerHTML = (e.target as HTMLLIElement).innerHTML
-			onClickOption(innerHTML)
-		} else {
-
-		}
+		onClick(e)
 	}
 
 	return (
@@ -111,6 +113,6 @@ const Dropdown = (props: { options: Array<option>, onClickOption: (e: any) => vo
 			))}
 		</StyledDropdown>
 	)
-}
+})
 
 export default Input
