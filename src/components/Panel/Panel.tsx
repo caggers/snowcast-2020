@@ -4,7 +4,7 @@ import Text from './Text'
 
 const StyledPanel = styled.div`
 	font-size: 1.5em;
-	margin-top: 1em;
+	margin: 2em auto;
 `
 
 type Props = {

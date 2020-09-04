@@ -18,12 +18,13 @@ const Wrapper = styled.div`
 	cursor: pointer;
 `
 const StyledInput = styled.input`
+	background-color: transparent;
 	border: none;
 	border-bottom: 1px solid rgba(238, 238, 238, 0.5);
 	color: white;
 	cursor: pointer;
 	font-size: 2rem;
-	background-color: transparent;
+	max-width: 240px;
 `
 
 const Input = (props: Props) => {
