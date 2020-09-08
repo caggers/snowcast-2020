@@ -16,3 +16,8 @@ export interface ISnowReportData {
 	uppersnow_cm: number
 	uppersnow_in: number
 }
+
+export type option = {
+	resortname: string
+	resortid: number
+}

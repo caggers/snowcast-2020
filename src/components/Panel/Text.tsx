@@ -2,11 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 
 const StyledText = styled.div`
-	margin: 1rem;
-
-	label {
-		font-size: 1rem;
-	}
+	padding-bottom: 0.75rem;
 	.text {
 		font-size: 2rem;
 	}
