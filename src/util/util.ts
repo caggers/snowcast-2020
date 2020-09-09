@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { ISnowReportData } from '../types/api'
 
 const API = process.env.REACT_APP_WEATHER_API
@@ -9,7 +9,10 @@ const HEADERS = {
 	Accept: 'application/json',
 }
 
-export function getData(type: string, resort_id: number) {
+export function getData(
+	type: string,
+	resort_id: number
+): Promise<AxiosResponse<ISnowReportData>> {
 	const URL = `${API}/${type}/${resort_id}?`
 	return axios.get(URL, {
 		headers: HEADERS,
@@ -24,7 +27,7 @@ export function getForecast(
 	resort_id: number,
 	num_days?: number,
 	interval?: number
-) {
+): Promise<AxiosResponse<any>> {
 	const URL = `${API}/resortforecast/${resort_id}`
 	return axios.get(URL, {
 		headers: HEADERS,
@@ -50,7 +53,12 @@ function buildTextObject(label: string, text: string) {
 	return { label: label, text: text }
 }
 
-export function buildTextArray(snowReport: ISnowReportData) {
+export function buildTextArray(
+	snowReport: ISnowReportData
+): Array<{
+	label: string
+	text: string
+}> {
 	const newSnow = buildTextObject('New Snow', `${snowReport.newsnow_cm} cm`)
 	const upperMountain = buildTextObject(
 		'Upper Mountain Snow',

@@ -28,25 +28,8 @@ const Arrow = styled.i`
 	-webkit-transform: rotate(45deg);
 `
 
-const StyledDropdown = styled.ul`
-	border-radius: 0.5rem;
-	background-color: rgba(238, 238, 238, 1);
-	cursor: pointer;
-	margin: 0;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	min-width: 160px;
-	padding: 12px 16px;
-	position: absolute;
-	z-index: 1;
-	color: black;
-	list-style: none;
-	> li:hover {
-		background: white;
-	}
-`
-
 const InputWrapper = styled.div`
 	display: -webkit-box;
 `
 
-export { Arrow, StyledInput, StyledDropdown, InputWrapper, Wrapper }
+export { Arrow, StyledInput, InputWrapper, Wrapper }

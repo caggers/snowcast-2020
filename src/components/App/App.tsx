@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FunctionComponent } from 'react'
 import { getData, buildTextArray, getForecast } from '../../util/util'
 import { AxiosResponse } from 'axios'
 import styled, { ThemeProvider } from 'styled-components'
-import { ISnowReportData, ITodaysForecast, text } from '../../types/api'
+import { ISnowReportData, ITodaysForecast, text, option } from '../../types/api'
 import { theme } from '../../util/themes'
 import Card from '../Card/Card'
 
@@ -11,16 +11,15 @@ const Background = styled.div`
 	background-color: rgba(238, 238, 238, 0.5);
 	color: white;
 	font-family: 'Public Sans', sans-serif;
-	height: auto;
+	height: 2000px;
 	left: 0;
-	min-height: 100%;
 	min-width: 1024px;
 	position: fixed;
 	top: 0;
 	width: 100%;
 `
 
-const App: React.FunctionComponent = () => {
+const App: FunctionComponent = () => {
 	const [snowReport, setSnowReport] = useState<ISnowReportData | null>(null)
 	const [resortID, setResortID] = useState<number>(222036)
 
@@ -31,7 +30,7 @@ const App: React.FunctionComponent = () => {
 			setSnowReport(data)
 		}
 		getInitialSnowReport()
-	}, [])
+	}, [resortID])
 
 	const [panelText, setPanelText] = useState<Array<text>>([])
 	useEffect(() => {
@@ -40,7 +39,7 @@ const App: React.FunctionComponent = () => {
 		}
 	}, [snowReport])
 
-	const handleClickOption = async (option: any) => {
+	const handleClickOption = async (option: option) => {
 		const report: AxiosResponse = await getData('snowreport', option.resortid)
 		const data: ISnowReportData = report.data
 		setSnowReport(data)
@@ -73,9 +72,14 @@ const App: React.FunctionComponent = () => {
 				<ThemeProvider theme={theme}>
 					<Background>
 						<Card
-							snowReport={snowReport}
-							panelText={panelText}
 							handleClickOption={handleClickOption}
+							panelText={panelText}
+							snowReport={snowReport}
+						/>
+						<Card
+							handleClickOption={handleClickOption}
+							panelText={panelText}
+							snowReport={snowReport}
 						/>
 					</Background>
 				</ThemeProvider>

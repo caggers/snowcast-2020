@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { useMemo } from 'react'
+import { useMemo, FunctionComponent } from 'react'
 import { ISnowReportData } from '../../types/api'
 import styled from 'styled-components'
 import { OPTIONS } from '../../util/util'
-import Text from '../Text/Text'
+import Text from './Text'
 import Panel from '../Panel/Panel'
 import Input from '../Input/Input'
 
@@ -22,7 +22,6 @@ const Background = styled.div`
 	background-image: linear-gradient(-45deg, #4158d0, #c850c0, #ffcc70);
 	min-width: 250px;
 	max-width: 900px;
-	height: auto;
 	margin: 10vh auto;
 	border-radius: 0.5rem;
 	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
@@ -53,13 +52,16 @@ const GridItemText = styled.div`
 	grid-row: 3 / span 1;
 `
 
-const Card = (props: Props) => {
-	const { snowReport, panelText, handleClickOption } = props
+const Card: FunctionComponent<Props> = ({
+	snowReport,
+	panelText,
+	handleClickOption,
+}) => {
 	const selected = {
 		resortname: snowReport.resortname,
 		resortid: snowReport.resortid,
 	}
-	const percentageOpen = `${snowReport.pctopen}% of the Runs are open`
+	const percentageOpen = `${snowReport.pctopen}% of the runs are open`
 	const dropdownOptions = useMemo(() => OPTIONS, [])
 
 	return (

@@ -1,16 +1,12 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import Text from './Text'
 import { text } from '../../types/api'
-
-const StyledPanel = styled.div``
 
 type Props = {
 	panelText: Array<text>
 }
 
-const Panel = (props: Props) => {
-	const { panelText } = props
+const Panel: React.FunctionComponent<Props> = ({ panelText }) => {
 	return (
 		<>
 			{panelText.map((item) => (
