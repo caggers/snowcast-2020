@@ -22,7 +22,7 @@ const Arrow = styled.i`
 	cursor: pointer;
 	display: inline-block;
 	margin-left: -20px;
-	margin-bottom: 4px;
+	margin-bottom: -10px;
 	padding: 3px;
 	transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
@@ -46,7 +46,7 @@ const StyledDropdown = styled.ul`
 `
 
 const InputWrapper = styled.div`
-	display: ruby;
+	display: -webkit-box;
 `
 
 export { Arrow, StyledInput, StyledDropdown, InputWrapper, Wrapper }
