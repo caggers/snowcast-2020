@@ -1,11 +1,12 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import Text from './Text'
+import { text } from '../../types/api'
 
 const StyledPanel = styled.div``
 
 type Props = {
-	panelText: Array<{ label: string; text: string }>
+	panelText: Array<text>
 }
 
 const Panel = (props: Props) => {

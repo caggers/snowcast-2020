@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { text } from '../../types/api'
 
 const StyledText = styled.div`
 	padding-bottom: 0.75rem;
@@ -8,7 +9,7 @@ const StyledText = styled.div`
 	}
 `
 
-const Text = (props: { item: any }) => {
+const Text = (props: { item: text }) => {
 	const { label, text } = props.item
 	return (
 		<StyledText>

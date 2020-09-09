@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
-import { getData, buildTextArray } from '../../util/util'
+import { getData, buildTextArray, getForecast } from '../../util/util'
 import { AxiosResponse } from 'axios'
 import styled, { ThemeProvider } from 'styled-components'
-import { ISnowReportData } from '../../types/api'
+import { ISnowReportData, ITodaysForecast, text } from '../../types/api'
 import { theme } from '../../util/themes'
 import Card from '../Card/Card'
 
@@ -22,16 +22,18 @@ const Background = styled.div`
 
 const App: React.FunctionComponent = () => {
 	const [snowReport, setSnowReport] = useState<ISnowReportData | null>(null)
+	const [resortID, setResortID] = useState<number>(222036)
+
 	useEffect(() => {
 		const getInitialSnowReport = async () => {
-			const report: AxiosResponse = await getData('snowreport', 222036)
+			const report: AxiosResponse = await getData('snowreport', resortID)
 			const data: ISnowReportData = report.data
 			setSnowReport(data)
 		}
 		getInitialSnowReport()
 	}, [])
 
-	const [panelText, setPanelText] = useState<any>(null)
+	const [panelText, setPanelText] = useState<Array<text>>([])
 	useEffect(() => {
 		if (snowReport !== null) {
 			setPanelText(buildTextArray(snowReport))
@@ -42,7 +44,24 @@ const App: React.FunctionComponent = () => {
 		const report: AxiosResponse = await getData('snowreport', option.resortid)
 		const data: ISnowReportData = report.data
 		setSnowReport(data)
+		setResortID(data.resortid)
 	}
+
+	const [todaysForecast, setTodaysForecast] = useState<ITodaysForecast | null>()
+	useEffect(() => {
+		const getInitialResortForecast = async () => {
+			const report: AxiosResponse = await getForecast(resortID, 1, 6)
+			const forecast: ITodaysForecast = {
+				base: report.data.forecast[1].base,
+				resortid: report.data.id,
+				resortname: report.data.name,
+				time: report.data.forecast[1].time,
+				upper: report.data.forecast[1].upper,
+			}
+			setTodaysForecast(forecast)
+		}
+		getInitialResortForecast()
+	}, [resortID])
 
 	return (
 		<>
