@@ -51,12 +51,16 @@ const App: React.FunctionComponent = () => {
 	useEffect(() => {
 		const getInitialResortForecast = async () => {
 			const report: AxiosResponse = await getForecast(resortID, 1, 6)
+			const morningForecast = report.data.forecast.find(
+				(item: any) => item.time === '07:00'
+			)
+
 			const forecast: ITodaysForecast = {
-				base: report.data.forecast[1].base,
+				base: morningForecast.base,
 				resortid: report.data.id,
 				resortname: report.data.name,
-				time: report.data.forecast[1].time,
-				upper: report.data.forecast[1].upper,
+				time: morningForecast.time,
+				upper: morningForecast.upper,
 			}
 			setTodaysForecast(forecast)
 		}
