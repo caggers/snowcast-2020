@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Text from './Text'
+import Text from '../Text/Text'
 import { text } from '../../types/api'
 
 type Props = {
@@ -10,7 +10,7 @@ const Panel: React.FunctionComponent<Props> = ({ panelText }) => {
 	return (
 		<>
 			{panelText.map((item) => (
-				<Text item={item} key={item.label} />
+				<Text label={item.label} text={item.text} key={item.label} />
 			))}
 		</>
 	)

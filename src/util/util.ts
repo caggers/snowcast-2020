@@ -53,7 +53,7 @@ function buildTextObject(label: string, text: string) {
 	return { label: label, text: text }
 }
 
-export function buildTextArray(
+export function buildTextArrayForPanel(
 	snowReport: ISnowReportData
 ): Array<{
 	label: string
