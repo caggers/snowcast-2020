@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect, FunctionComponent } from 'react'
-import { getData, buildTextArray, getForecast } from '../../util/util'
+import { getData, buildTextArrayForPanel, getForecast } from '../../util/util'
 import { AxiosResponse } from 'axios'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { ISnowReportData, ITodaysForecast, text, option } from '../../types/api'
@@ -13,12 +13,17 @@ const GlobalStyle = createGlobalStyle`
 		color: white;
 		font-family: 'Public Sans', sans-serif;
   }
+	@media screen and (max-width: 600px) {
+  body {
+    font-size: ${theme.fontSizes.fontS};
+  }
+}
 `
 
 const App: FunctionComponent = () => {
-	const [snowReport, setSnowReport] = useState<ISnowReportData | null>(null)
 	const [resortID, setResortID] = useState<number>(222036)
 
+	const [snowReport, setSnowReport] = useState<ISnowReportData | null>(null)
 	useEffect(() => {
 		const getInitialSnowReport = async () => {
 			const report: AxiosResponse = await getData('snowreport', resortID)
@@ -31,7 +36,7 @@ const App: FunctionComponent = () => {
 	const [panelText, setPanelText] = useState<Array<text>>([])
 	useEffect(() => {
 		if (snowReport !== null) {
-			setPanelText(buildTextArray(snowReport))
+			setPanelText(buildTextArrayForPanel(snowReport))
 		}
 	}, [snowReport])
 
@@ -71,6 +76,10 @@ const App: FunctionComponent = () => {
 						handleClickOption={handleClickOption}
 						panelText={panelText}
 						snowReport={snowReport}
+						weatherDesc={{
+							base: todaysForecast?.base.wx_desc,
+							upper: todaysForecast?.base.wx_desc,
+						}}
 					/>
 				</ThemeProvider>
 			)}
