@@ -2,37 +2,77 @@ import styled from 'styled-components'
 
 const Background = styled.div`
 	background-image: linear-gradient(-45deg, #4158d0, #c850c0, #ffcc70);
-	min-width: 250px;
-	max-width: 900px;
-	height: auto;
-	margin: 10vh auto;
-	border-radius: 0.5rem;
+	border-radius: 10px;
 	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
+	margin: 10vh auto;
+	max-width: 750px;
+	min-width: 250px;
+	max-height: 600px;
+	overflow-y: scroll;
+	@media screen and (max-width: 600px) {
+		max-height: none;
+		margin: 0;
+	}
 `
+Background.displayName = 'CardBackground'
 
 const Grid = styled.div`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(4, 100px);
+	grid-template-rows: repeat(4, 1fr);
+	@media screen and (max-width: 600px) {
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+	}
 `
+Grid.displayName = 'Grid'
 
-const GridItemInput = styled.div`
+const GridRow1 = styled.div`
 	grid-column: 1 / span 2;
 	grid-row: 1 / span 1;
-	padding: 2rem 0 0 2rem;
+	padding: 10% 0 0 10%;
+	@media screen and (max-width: 600px) {
+		grid-column: 1 / span 1;
+		grid-row: 1 / span 1;
+		padding: 10%;
+	}
 `
+GridRow1.displayName = 'GridRow1'
 
-const GridItemPanel = styled.div`
-	background: rgba(238, 238, 238, 0.5);
-	grid-column: 3 / span 1;
-	grid-row: 1 / span 5;
-	padding: 2rem 0 0 2rem;
+const GridRow2 = styled.div`
+	grid-column: 1 / span 2;
+	grid-row: 2 / span 1;
+	padding: 0 0 0 10%;
+	@media screen and (max-width: 600px) {
+		grid-column: 1 / span 1;
+		grid-row: 2 / span 1;
+	}
 `
+GridRow2.displayName = 'GridRow2'
 
-const GridItemText = styled.div`
+const GridRow3 = styled.div`
 	grid-column: 1 / span 2;
 	grid-row: 3 / span 1;
-	padding: 0 0 0 2rem;
+	padding: 0 0 0 10%;
+	@media screen and (max-width: 600px) {
+		grid-column: 1 / span 1;
+		grid-row: 3 / span 1;
+		padding: 10%;
+	}
 `
+GridRow3.displayName = 'GridRow3'
 
-export { Background, Grid, GridItemInput, GridItemPanel, GridItemText }
+const GridCol3 = styled.div`
+	background: rgba(238, 238, 238, 0.5);
+	grid-column: 3 / span 1;
+	grid-row: 1 / span 4;
+	padding: 15% 0 10% 10%;
+	@media screen and (max-width: 600px) {
+		grid-column: 1 / span 1;
+		grid-row: 4 / span 1;
+		padding: 10%;
+	}
+`
+GridCol3.displayName = 'GridCol3'
+
+export { Background, Grid, GridCol3, GridRow1, GridRow2, GridRow3 }
