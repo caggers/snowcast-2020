@@ -26,7 +26,7 @@ const Text: React.FunctionComponent<Props> = ({ text, label }) => {
 	return (
 		<StyledText>
 			{label && <label htmlFor={label}>{label}:</label>}
-			<div className="text" id={label}>
+			<div className="text" id={label} aria-label={label}>
 				{text}
 			</div>
 		</StyledText>

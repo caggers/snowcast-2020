@@ -75,7 +75,7 @@ describe('Input', () => {
 		})
 
 		it('clicks outside of the dropdown, the dropdown closes and the selected option does not change', () => {
-			const { container, input, debug } = setup()
+			const { container, input } = setup()
 
 			fireEvent.click(input)
 			const dropdown = getByTestId(container, 'dropdown') as HTMLUListElement
