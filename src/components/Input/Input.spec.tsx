@@ -6,6 +6,7 @@ import {
 	getByTestId,
 	getByText,
 } from '@testing-library/react'
+import { ThemeProvider } from 'styled-components'
 import Input from './Input'
 import { OPTIONS } from '../../util/util'
 
@@ -14,18 +15,24 @@ describe('Input', () => {
 		options: OPTIONS,
 		selected: OPTIONS[0],
 		handleClickOption: jest.fn(),
+		theme: {
+			fontSizes: {
+				fontLrg: '1rem',
+			},
+		},
 	}
-	beforeAll(() => {})
 
 	afterAll(cleanup)
 
 	const setup = () => {
 		const { container, debug } = render(
-			<Input
-				options={props.options}
-				selected={props.selected}
-				handleClickOption={props.handleClickOption}
-			/>
+			<ThemeProvider theme={props.theme}>
+				<Input
+					options={props.options}
+					selected={props.selected}
+					handleClickOption={props.handleClickOption}
+				/>
+			</ThemeProvider>
 		)
 		const input = getByTestId(container, 'location-input') as HTMLInputElement
 
