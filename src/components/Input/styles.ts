@@ -12,8 +12,11 @@ const StyledInput = styled.input`
 	border-bottom: 1px solid rgba(238, 238, 238, 0.5);
 	color: white;
 	cursor: pointer;
-	font-size: 2rem;
+	font-size: ${(props) => props.theme.fontSizes.fontLrg};
 	max-width: 210px;
+	@media screen and (max-width: 600px) {
+		font-size: ${(props) => props.theme.fontSizes.fontS};
+	}
 `
 
 const Arrow = styled.i`
@@ -26,6 +29,9 @@ const Arrow = styled.i`
 	padding: 3px;
 	transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
+	@media screen and (max-width: 600px) {
+		margin-bottom: 0;
+	}
 `
 
 const InputWrapper = styled.div`
