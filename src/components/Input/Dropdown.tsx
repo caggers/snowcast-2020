@@ -25,6 +25,9 @@ const StyledDropdown = styled.ul`
 	> li:hover {
 		background: white;
 	}
+	@media screen and (max-width: 600px) {
+		font-size: ${(props) => props.theme.fontSizes.fontMed};
+	}
 `
 
 const Dropdown = forwardRef<Ref, DropdownProps>(({ options, onClick }, ref) => {
