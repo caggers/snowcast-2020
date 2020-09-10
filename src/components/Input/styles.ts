@@ -5,6 +5,11 @@ const Wrapper = styled.div`
 	input {
 		display: block;
 	}
+	@media screen and (max-width: 600px) {
+		label {
+			font-size: ${(props) => props.theme.fontSizes.fontS};
+		}
+	}
 `
 const StyledInput = styled.input`
 	background-color: transparent;
@@ -15,7 +20,7 @@ const StyledInput = styled.input`
 	font-size: ${(props) => props.theme.fontSizes.fontLrg};
 	max-width: 210px;
 	@media screen and (max-width: 600px) {
-		font-size: ${(props) => props.theme.fontSizes.fontS};
+		font-size: ${(props) => props.theme.fontSizes.fontMed};
 	}
 `
 

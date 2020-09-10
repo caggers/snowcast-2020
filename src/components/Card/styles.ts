@@ -34,7 +34,7 @@ const GridRow1 = styled.div`
 	@media screen and (max-width: 600px) {
 		grid-column: 1 / span 1;
 		grid-row: 1 / span 1;
-		padding: 10%;
+		padding: 10% 0 0 10%;
 	}
 `
 GridRow1.displayName = 'GridRow1'
@@ -46,6 +46,7 @@ const GridRow2 = styled.div`
 	@media screen and (max-width: 600px) {
 		grid-column: 1 / span 1;
 		grid-row: 2 / span 1;
+		padding: 10% 0 0 10%;
 	}
 `
 GridRow2.displayName = 'GridRow2'
@@ -57,7 +58,7 @@ const GridRow3 = styled.div`
 	@media screen and (max-width: 600px) {
 		grid-column: 1 / span 1;
 		grid-row: 3 / span 1;
-		padding: 10%;
+		padding: 0 0 0 10%;
 	}
 `
 GridRow3.displayName = 'GridRow3'
@@ -70,7 +71,8 @@ const GridCol3 = styled.div`
 	@media screen and (max-width: 600px) {
 		grid-column: 1 / span 1;
 		grid-row: 4 / span 1;
-		padding: 10%;
+		background: transparent;
+		padding: 0 0 0 10%;
 	}
 `
 GridCol3.displayName = 'GridCol3'

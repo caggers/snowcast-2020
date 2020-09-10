@@ -13,11 +13,11 @@ const StyledText = styled.div`
 		font-size: ${(props) => props.theme.fontSizes.fontLrg};
 	}
 	@media screen and (max-width: 600px) {
-		/* label {
-			font-size: ${(props) => props.theme.fontSizes.fontXS};
-		} */
-		.text {
+		label {
 			font-size: ${(props) => props.theme.fontSizes.fontS};
+		}
+		.text {
+			font-size: ${(props) => props.theme.fontSizes.fontMed};
 		}
 	}
 `

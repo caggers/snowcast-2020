@@ -44,6 +44,7 @@ const Input: FunctionComponent<Props> = ({
 			<label htmlFor="location">Select a Ski Area:</label>
 			<InputWrapper onClick={() => onClickInput()}>
 				<StyledInput
+					aria-label="location"
 					data-testid="location-input"
 					id="location"
 					readOnly
