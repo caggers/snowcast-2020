@@ -32,6 +32,10 @@ const Background = styled.div`
 	overflow-y: scroll;
 	/* filter: ${(props: { loading: boolean }) =>
 		props.loading ? 'blur(5px)' : 'none'}; */
+	@media screen and (max-width: 600px) {
+		margin: 0 auto;
+		max-height: none;
+	}
 `
 Background.displayName = 'CardBackground'
 
