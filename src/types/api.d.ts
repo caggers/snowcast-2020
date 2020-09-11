@@ -18,14 +18,14 @@ export interface ISnowReportData {
 }
 
 export interface ITodaysForecast {
-	base: Forecast
-	resortid: number
-	resortname: string
-	time: string
-	upper: Forecast
+	base: Forecast | { wx_desc: string }
+	upper: Forecast | { wx_desc: string }
+	resortid?: number
+	resortname?: string
+	time?: string
 }
 
-interface Forecast {
+export interface Forecast {
 	feelslike_avg_c: number
 	feelslike_avg_f: number
 	feelslike_c: number

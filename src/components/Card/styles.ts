@@ -1,21 +1,5 @@
 import styled from 'styled-components'
 
-const Background = styled.div`
-	background-image: linear-gradient(-45deg, #4158d0, #c850c0, #ffcc70);
-	border-radius: 10px;
-	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
-	margin: 10vh auto;
-	max-width: 750px;
-	min-width: 250px;
-	max-height: 600px;
-	overflow-y: scroll;
-	@media screen and (max-width: 600px) {
-		max-height: none;
-		margin: 0;
-	}
-`
-Background.displayName = 'CardBackground'
-
 const Grid = styled.div`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -68,6 +52,8 @@ const GridCol3 = styled.div`
 	grid-column: 3 / span 1;
 	grid-row: 1 / span 4;
 	padding: 15% 0 10% 10%;
+	/* filter: invert(1); */
+	/* color: black; */
 	@media screen and (max-width: 600px) {
 		grid-column: 1 / span 1;
 		grid-row: 4 / span 1;
@@ -77,4 +63,4 @@ const GridCol3 = styled.div`
 `
 GridCol3.displayName = 'GridCol3'
 
-export { Background, Grid, GridCol3, GridRow1, GridRow2, GridRow3 }
+export { Grid, GridCol3, GridRow1, GridRow2, GridRow3 }

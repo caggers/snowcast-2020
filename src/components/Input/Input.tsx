@@ -17,7 +17,7 @@ const Input: FunctionComponent<Props> = ({
 }) => {
 	const ref = useRef<HTMLUListElement | null>(null)
 
-	const [filteredOption, setFilteredOption] = useState<Array<option> | []>([])
+	const [, setFilteredOption] = useState<Array<option> | []>([])
 	const [showDropdown, setShowDropdown] = useState(false)
 	const [value, setValue] = useState(selected.resortname)
 
