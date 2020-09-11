@@ -30,6 +30,8 @@ const Background = styled.div`
 	min-width: 250px;
 	max-height: 600px;
 	overflow-y: scroll;
+	/* filter: ${(props: { loading: boolean }) =>
+		props.loading ? 'blur(5px)' : 'none'}; */
 `
 Background.displayName = 'CardBackground'
 
@@ -42,6 +44,7 @@ const Card: FunctionComponent<Props> = ({
 }) => {
 	const [selected, setSelected] = useState({ resortname: '', resortid: 0 })
 
+	console.log(loading)
 	useEffect(() => {
 		if (snowReport !== null) {
 			setSelected({
@@ -54,42 +57,45 @@ const Card: FunctionComponent<Props> = ({
 	const percentageOpen = `${snowReport?.pctopen}% of the runs are open`
 	const dropdownOptions = useMemo(() => OPTIONS, [])
 
+	const [time, setTime] = useState(0)
+	useEffect(() => {
+		setTime(new Date().getHours())
+	}, [time])
+
 	return (
-		<>
-			<Background>
-				{snowReport !== null && panelText !== null && (
-					<Grid>
-						<GridRow1>
-							<Input
-								options={dropdownOptions}
-								selected={selected}
-								handleClickOption={handleClickOption}
-							/>
-						</GridRow1>
+		<Background loading={loading}>
+			{snowReport !== null && panelText !== null && (
+				<Grid>
+					<GridRow1>
+						<Input
+							options={dropdownOptions}
+							selected={selected}
+							handleClickOption={handleClickOption}
+						/>
+					</GridRow1>
 
-						<GridRow2>
-							<Text
-								label="Bottom station weather conditions"
-								text={weatherDesc.base}
-							/>
-							<Text
-								label="Top station weather conditions"
-								text={weatherDesc.upper}
-							/>
-						</GridRow2>
+					<GridRow2>
+						<Text
+							label="Bottom station weather conditions"
+							text={weatherDesc.base}
+						/>
+						<Text
+							label="Top station weather conditions"
+							text={weatherDesc.upper}
+						/>
+					</GridRow2>
 
-						<GridRow3>
-							<Text text={snowReport.conditions} label="Status" />
-							<Text text={percentageOpen} label="Percentage of the runs open" />
-						</GridRow3>
+					<GridRow3>
+						<Text text={snowReport.conditions} label="Status" />
+						<Text text={percentageOpen} label="Percentage of the runs open" />
+					</GridRow3>
 
-						<GridCol3>
-							<Panel panelText={panelText} />
-						</GridCol3>
-					</Grid>
-				)}
-			</Background>
-		</>
+					<GridCol3>
+						<Panel panelText={panelText} />
+					</GridCol3>
+				</Grid>
+			)}
+		</Background>
 	)
 }
 

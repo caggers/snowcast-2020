@@ -6,7 +6,6 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { ISnowReportData, ITodaysForecast, option, text } from '../../types/api'
 import { theme } from '../../util/themes'
 import Card from '../Card/Card'
-import Loading from '../Loading/Loading'
 
 const GlobalStyle = createGlobalStyle`
   body {

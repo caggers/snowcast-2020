@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+const Filter = styled.div`
+	filter: invert(1);
+`
+Filter.displayName = 'Filter'
+
 const Grid = styled.div`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -52,8 +57,8 @@ const GridCol3 = styled.div`
 	grid-column: 3 / span 1;
 	grid-row: 1 / span 4;
 	padding: 15% 0 10% 10%;
-	/* filter: invert(1); */
-	/* color: black; */
+	/* filter: invert(1);
+	color: black; */
 	@media screen and (max-width: 600px) {
 		grid-column: 1 / span 1;
 		grid-row: 4 / span 1;
@@ -63,4 +68,4 @@ const GridCol3 = styled.div`
 `
 GridCol3.displayName = 'GridCol3'
 
-export { Grid, GridCol3, GridRow1, GridRow2, GridRow3 }
+export { Filter, Grid, GridCol3, GridRow1, GridRow2, GridRow3 }
