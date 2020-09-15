@@ -86,10 +86,10 @@ export type text = {
 }
 
 export interface ServerError {
-	config: any
-	data: { message: string }
-	headers: any
-	request: XMLHttpRequest
-	status: number
-	statusText: string
+	config?: any
+	data?: { message: string }
+	headers?: any
+	request?: XMLHttpRequest | any
+	status?: number
+	statusText?: string
 }
