@@ -15,7 +15,6 @@ type option = {
 
 type Props = {
 	handleClickOption: (option: option) => Promise<void>
-	loading: boolean
 	panelText: Array<{ label: string; text: string }> | null
 	snowReport: ISnowReportData | null
 	weatherDesc: { base: string; upper: string }
@@ -30,8 +29,7 @@ const Background = styled.div`
 	min-width: 250px;
 	max-height: 600px;
 	overflow-y: scroll;
-	/* filter: ${(props: { loading: boolean }) =>
-		props.loading ? 'blur(5px)' : 'none'}; */
+
 	@media screen and (max-width: 600px) {
 		margin: 0 auto;
 		max-height: none;
@@ -41,14 +39,11 @@ Background.displayName = 'CardBackground'
 
 const Card: FunctionComponent<Props> = ({
 	handleClickOption,
-	loading,
 	panelText,
 	snowReport,
 	weatherDesc,
 }) => {
 	const [selected, setSelected] = useState({ resortname: '', resortid: 0 })
-
-	console.log(loading)
 	useEffect(() => {
 		if (snowReport !== null) {
 			setSelected({
@@ -61,13 +56,8 @@ const Card: FunctionComponent<Props> = ({
 	const percentageOpen = `${snowReport?.pctopen}% of the runs are open`
 	const dropdownOptions = useMemo(() => OPTIONS, [])
 
-	const [time, setTime] = useState(0)
-	useEffect(() => {
-		setTime(new Date().getHours())
-	}, [time])
-
 	return (
-		<Background loading={loading}>
+		<Background>
 			{snowReport !== null && panelText !== null && (
 				<Grid>
 					<GridRow1>

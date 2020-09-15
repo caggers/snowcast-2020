@@ -76,9 +76,9 @@ const App: FunctionComponent = () => {
 		<>
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
+
 				<Card
 					handleClickOption={handleClickOption}
-					loading={loading}
 					panelText={panelText}
 					snowReport={snowReport}
 					weatherDesc={{
