@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { ISnowReportData } from '../types/api'
+import { ISnowReportData, ITodaysForecast } from '../types/api'
 
 const API = process.env.REACT_APP_WEATHER_API
 const APP_ID = process.env.REACT_APP_WEATHER_APP_CODE
@@ -11,24 +11,14 @@ const HEADERS = {
 
 export function getData(
 	type: string,
-	resort_id: number
-): Promise<AxiosResponse<ISnowReportData>> {
-	const URL = `${API}/${type}/${resort_id}?`
-	return axios.get(URL, {
-		headers: HEADERS,
-		params: {
-			app_id: APP_ID,
-			app_key: APP_KEY,
-		},
-	})
-}
-
-export function getForecast(
 	resort_id: number,
 	num_days?: number,
 	interval?: number
-): Promise<AxiosResponse<any>> {
-	const URL = `${API}/resortforecast/${resort_id}`
+): Promise<AxiosResponse<ISnowReportData | ITodaysForecast>> {
+	const URL =
+		type === 'snowreport'
+			? `${API}/${type}/${resort_id}?`
+			: `${API}/${type}/${resort_id}`
 	return axios.get(URL, {
 		headers: HEADERS,
 		params: {
@@ -39,6 +29,23 @@ export function getForecast(
 		},
 	})
 }
+
+// export function getForecast(
+// 	resort_id: number,
+// 	num_days?: number,
+// 	interval?: number
+// ): Promise<AxiosResponse<ITodaysForecast>> {
+// 	const URL = `${API}/resortforecast/${resort_id}`
+// 	return axios.get(URL, {
+// 		headers: HEADERS,
+// 		params: {
+// 			num_of_days: num_days,
+// 			hourly_interval: interval,
+// 			app_id: APP_ID,
+// 			app_key: APP_KEY,
+// 		},
+// 	})
+// }
 
 export async function buildContext() {
 	return {

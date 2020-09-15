@@ -84,3 +84,12 @@ export type text = {
 	label: string
 	text: string
 }
+
+export interface ServerError {
+	config: any
+	data: { message: string }
+	headers: any
+	request: XMLHttpRequest
+	status: number
+	statusText: string
+}

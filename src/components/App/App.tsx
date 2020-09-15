@@ -1,11 +1,19 @@
 import * as React from 'react'
 import { useState, useEffect, FunctionComponent } from 'react'
-import { getData, buildTextArrayForPanel, getForecast } from '../../util/util'
-import { AxiosResponse } from 'axios'
+import { getData, buildTextArrayForPanel } from '../../util/util'
+import { AxiosResponse, AxiosError } from 'axios'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { ISnowReportData, ITodaysForecast, option, text } from '../../types/api'
+import {
+	ISnowReportData,
+	ITodaysForecast,
+	ServerError,
+	option,
+	text,
+} from '../../types/api'
 import { theme } from '../../util/themes'
 import Card from '../Card/Card'
+import Loading from '../Loading/Loading'
+import Error from '../Error/Error'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -23,15 +31,24 @@ const GlobalStyle = createGlobalStyle`
 const App: FunctionComponent = () => {
 	const [resortID, setResortID] = useState<number>(222036)
 	const [loading, setLoading] = useState<boolean>(true)
+	const [error, setError] = useState<AxiosError<ServerError> | undefined>()
 
 	const [snowReport, setSnowReport] = useState<ISnowReportData | null>(null)
 	useEffect(() => {
 		setLoading(true)
 		const getSnowReport = async () => {
-			const report: AxiosResponse = await getData('snowreport', resortID)
-			const data: ISnowReportData = report.data
-			setSnowReport(data)
-			setLoading(false)
+			try {
+				const request: AxiosResponse = await getData('snowreport', resortID)
+				const data: ISnowReportData = request.data
+				setSnowReport(data)
+				setLoading(false)
+			} catch (err) {
+				if (err && err.response) {
+					const axiosError = err as AxiosError<ServerError>
+					setError(axiosError)
+					setLoading(false)
+				}
+			}
 		}
 		getSnowReport()
 	}, [resortID])
@@ -43,21 +60,35 @@ const App: FunctionComponent = () => {
 	useEffect(() => {
 		setLoading(true)
 		const getResortForecast = async () => {
-			const report: AxiosResponse = await getForecast(resortID, 1, 6)
-			const morningForecast = report.data.forecast.find(
-				(item: ITodaysForecast) => item.time === '07:00'
-			)
+			try {
+				const report: AxiosResponse = await getData(
+					'resortforecast',
+					resortID,
+					1,
+					6
+				)
+				const morningForecast = report.data.forecast.find(
+					(item: ITodaysForecast) => item.time === '07:00'
+				)
 
-			const forecast: ITodaysForecast = {
-				base: morningForecast.base,
-				resortid: report.data.id,
-				resortname: report.data.name,
-				time: morningForecast.time,
-				upper: morningForecast.upper,
+				const forecast: ITodaysForecast = {
+					base: morningForecast.base,
+					resortid: report.data.id,
+					resortname: report.data.name,
+					time: morningForecast.time,
+					upper: morningForecast.upper,
+				}
+				setTodaysForecast(forecast)
+				setLoading(false)
+			} catch (err) {
+				if (err && err.response) {
+					const axiosError = err.response as AxiosError<ServerError>
+					setError(axiosError)
+					setLoading(false)
+				}
 			}
-			setTodaysForecast(forecast)
-			setLoading(false)
 		}
+
 		getResortForecast()
 	}, [resortID])
 
@@ -76,16 +107,20 @@ const App: FunctionComponent = () => {
 		<>
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
-
-				<Card
-					handleClickOption={handleClickOption}
-					panelText={panelText}
-					snowReport={snowReport}
-					weatherDesc={{
-						base: todaysForecast?.base.wx_desc,
-						upper: todaysForecast?.base.wx_desc,
-					}}
-				/>
+				{loading && <Loading />}
+				{!error ? (
+					<Card
+						handleClickOption={handleClickOption}
+						panelText={panelText}
+						snowReport={snowReport}
+						weatherDesc={{
+							base: todaysForecast?.base.wx_desc,
+							upper: todaysForecast?.base.wx_desc,
+						}}
+					/>
+				) : (
+					<Error error={error} />
+				)}
 			</ThemeProvider>
 		</>
 	)
