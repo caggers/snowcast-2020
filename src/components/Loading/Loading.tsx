@@ -10,7 +10,7 @@ const LoadingStyles = styled.div`
 const Loading: FunctionComponent = () => {
 	return (
 		<LoadingStyles>
-			<div>Fetching Data from the API....</div>
+			<div data-testid="loading">Fetching Data from the API....</div>
 		</LoadingStyles>
 	)
 }
