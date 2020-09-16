@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect, FunctionComponent } from 'react'
-import { getData, buildTextArrayForPanel } from '../../util/util'
+import { getData } from '../../util/util'
 import { AxiosResponse, AxiosError } from 'axios'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import {
@@ -8,12 +8,11 @@ import {
 	ITodaysForecast,
 	ServerError,
 	option,
-	text,
 } from '../../types/api'
 import { theme } from '../../util/themes'
-import Card from '../Card/Card'
-import Loading from '../Loading/Loading'
 import Error from '../Error/Error'
+import Content from './Content'
+import Loading from '../Loading/Loading'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -92,13 +91,6 @@ const App: FunctionComponent = () => {
 		getResortForecast()
 	}, [resortID])
 
-	const [panelText, setPanelText] = useState<Array<text> | null>(null)
-	useEffect(() => {
-		if (snowReport !== null) {
-			setPanelText(buildTextArrayForPanel(snowReport))
-		}
-	}, [snowReport])
-
 	const handleClickOption = async (option: option) => {
 		setResortID(option.resortid)
 	}
@@ -108,19 +100,16 @@ const App: FunctionComponent = () => {
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
 				{loading && <Loading />}
-				{!error ? (
-					<Card
+				{!error && !loading && (
+					<Content
 						handleClickOption={handleClickOption}
-						panelText={panelText}
 						snowReport={snowReport}
-						weatherDesc={{
-							base: todaysForecast?.base.wx_desc,
-							upper: todaysForecast?.base.wx_desc,
-						}}
+						weatherDesc={todaysForecast}
+						error={error}
+						loading={loading}
 					/>
-				) : (
-					<Error error={error} />
 				)}
+				{error && <Error error={error} />}
 			</ThemeProvider>
 		</>
 	)
