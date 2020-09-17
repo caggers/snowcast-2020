@@ -5,5 +5,6 @@ My Dad is an avid skier and loves to go to Austria. This weather app shows him t
 
 Deployed to Nelfiy: https://schneecast.netlify.app/
 
-To run locally, pull branch and _npm start_
+To run locally, pull branch and __npm start__
+
 See package.json for testing scripts
