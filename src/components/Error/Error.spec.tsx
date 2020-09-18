@@ -52,9 +52,7 @@ describe('Error', () => {
 				...newError,
 			},
 		}
-		const { container, getByText, queryByTestId } = render(
-			<Error error={newProps.error} />
-		)
+		const { container, getByText, queryByTestId } = render(<Error error={newProps.error} />)
 
 		const message = getByText(newProps.error.message)
 		expect(container).toContainElement(message)

@@ -20,8 +20,16 @@
 	},
 	"plugins": ["react", "@typescript-eslint", "react-hooks"],
 	"rules": {
-		"indent": ["error", "tab"],
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
 		"linebreak-style": ["error", "unix"],
+		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
+		"no-unneeded-ternary": "error",
 		"quotes": ["error", "single"],
 		"semi": ["error", "never"],
 		"no-restricted-imports": ["error", "import1", "import2"],

@@ -29,6 +29,7 @@ const Background = styled.div`
 	min-width: 250px;
 	max-height: 600px;
 	overflow-y: scroll;
+	position: relative;
 
 	@media screen and (max-width: 600px) {
 		margin: 0 auto;
@@ -69,22 +70,13 @@ const Card: FunctionComponent<Props> = ({
 					</GridRow1>
 
 					<GridRow2>
-						<Text
-							label="Bottom station weather conditions"
-							text={weatherDesc.base}
-						/>
-						<Text
-							label="Top station weather conditions"
-							text={weatherDesc.upper}
-						/>
+						<Text label="Bottom station weather conditions" text={weatherDesc.base} />
+						<Text label="Top station weather conditions" text={weatherDesc.upper} />
 					</GridRow2>
 
 					<GridRow3>
 						<Text text={snowReport.conditions} label="Status" />
-						<Text
-							text={percentageOpen}
-							label="Percentage of the runs open"
-						/>
+						<Text text={percentageOpen} label="Percentage of the runs open" />
 					</GridRow3>
 
 					<GridCol3>

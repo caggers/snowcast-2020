@@ -1,18 +1,13 @@
 import * as React from 'react'
 import { useState, useEffect, FunctionComponent } from 'react'
-import { getData } from '../../util/util'
-import { AxiosResponse, AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
-import {
-	ISnowReportData,
-	ITodaysForecast,
-	ServerError,
-	option,
-} from '../../types/api'
+import { ITodaysForecast, ServerError, option, Forecast } from '../../types/api'
 import { theme } from '../../util/themes'
 import Error from '../Error/Error'
 import Content from './Content'
 import Loading from '../Loading/Loading'
+import { useGetData } from './useGetData'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -28,74 +23,54 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const App: FunctionComponent = () => {
-	const [resortID, setResortID] = useState<number>(222036)
-	const [loading, setLoading] = useState<boolean>(true)
-	const [error, setError] = useState<AxiosError<ServerError> | undefined>()
-
-	const [snowReport, setSnowReport] = useState<ISnowReportData | null>(null)
-	useEffect(() => {
-		setLoading(true)
-		const getSnowReport = async () => {
-			try {
-				const request: AxiosResponse = await getData(
-					'snowreport',
-					resortID
-				)
-				const data: ISnowReportData = request.data
-				setSnowReport(data)
-				setLoading(false)
-			} catch (err) {
-				if (err && err.response) {
-					const axiosError = err as AxiosError<ServerError>
-					setError(axiosError)
-					setLoading(false)
-				}
-			}
-		}
-		getSnowReport()
-	}, [resortID])
+	const { state: snowReport, setResortID: setSnowReportID } = useGetData('snowreport', 222036)
+	const { state: resortForecast, setResortID: setResortForecastID } = useGetData(
+		'resortforecast',
+		222036,
+		6,
+		1
+	)
 
 	const [todaysForecast, setTodaysForecast] = useState<ITodaysForecast>({
 		base: { wx_desc: '' },
 		upper: { wx_desc: '' },
 	})
 	useEffect(() => {
-		setLoading(true)
 		const getResortForecast = async () => {
-			try {
-				const report: AxiosResponse = await getData(
-					'resortforecast',
-					resortID,
-					1,
-					6
-				)
-				const morningForecast = report.data.forecast.find(
-					(item: ITodaysForecast) => item.time === '07:00'
-				)
-
-				const forecast: ITodaysForecast = {
-					base: morningForecast.base,
-					resortid: report.data.id,
-					resortname: report.data.name,
-					time: morningForecast.time,
-					upper: morningForecast.upper,
-				}
-				setTodaysForecast(forecast)
-				setLoading(false)
-			} catch (err) {
-				if (err && err.response) {
-					const axiosError = err.response as AxiosError<ServerError>
-					setError(axiosError)
-					setLoading(false)
-				}
+			if (!resortForecast?.resortForecastData) {
+				return
 			}
+			const data = resortForecast.resortForecastData
+			const morningForecast = data.forecast.find((item: Forecast) => item.time === '07:00')
+
+			const forecast: ITodaysForecast = {
+				base: morningForecast!.base,
+				resortid: data.id,
+				resortname: data.name,
+				time: morningForecast!.time,
+				upper: morningForecast!.upper,
+			}
+			setTodaysForecast(forecast)
 		}
 
 		getResortForecast()
-	}, [resortID])
+	}, [resortForecast])
+
+	const [error, setError] = useState<AxiosError<ServerError> | false>(false)
+	useEffect(() => {
+		snowReport.error ? setError(snowReport.error) : null
+		resortForecast.error ? setError(resortForecast.error) : null
+	}, [snowReport, resortForecast])
+
+	const [loading, setLoading] = useState<boolean>(false)
+	useEffect(() => {
+		setLoading(snowReport.isLoading)
+		setLoading(resortForecast.isLoading)
+	}, [resortForecast.isLoading, snowReport.isLoading])
 
 	const handleClickOption = async (option: option) => {
-		setResortID(option.resortid)
+		setSnowReportID(option.resortid)
+		setResortForecastID(option.resortid)
 	}
 
 	return (
@@ -103,13 +78,11 @@ const App: FunctionComponent = () => {
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
 				{loading && <Loading />}
-				{!error && !loading && (
+				{snowReport.snowReportData && (
 					<Content
 						handleClickOption={handleClickOption}
-						snowReport={snowReport}
+						snowReport={snowReport.snowReportData}
 						weatherDesc={todaysForecast}
-						error={error}
-						loading={loading}
 					/>
 				)}
 				{error && <Error error={error} />}

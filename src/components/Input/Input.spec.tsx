@@ -1,11 +1,5 @@
 import * as React from 'react'
-import {
-	render,
-	cleanup,
-	fireEvent,
-	getByTestId,
-	getByText,
-} from '@testing-library/react'
+import { render, cleanup, fireEvent, getByTestId, getByText } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import Input from './Input'
 import { OPTIONS } from '../../util/util'
@@ -34,10 +28,7 @@ describe('Input', () => {
 				/>
 			</ThemeProvider>
 		)
-		const input = getByTestId(
-			container,
-			'location-input'
-		) as HTMLInputElement
+		const input = getByTestId(container, 'location-input') as HTMLInputElement
 
 		return {
 			input,
@@ -60,10 +51,7 @@ describe('Input', () => {
 
 			fireEvent.click(input)
 
-			const dropdown = getByTestId(
-				container,
-				'dropdown'
-			) as HTMLUListElement
+			const dropdown = getByTestId(container, 'dropdown') as HTMLUListElement
 			expect(container).toContainElement(dropdown)
 		})
 
@@ -72,14 +60,8 @@ describe('Input', () => {
 
 			fireEvent.click(input)
 
-			const dropdown = getByTestId(
-				container,
-				'dropdown'
-			) as HTMLUListElement
-			const secondOption = getByText(
-				dropdown,
-				props.options[1].resortname
-			)
+			const dropdown = getByTestId(container, 'dropdown') as HTMLUListElement
+			const secondOption = getByText(dropdown, props.options[1].resortname)
 			fireEvent.click(secondOption)
 
 			expect(input.value).toEqual(props.options[1].resortname)
@@ -90,10 +72,7 @@ describe('Input', () => {
 			const { container, input } = setup()
 
 			fireEvent.click(input)
-			const dropdown = getByTestId(
-				container,
-				'dropdown'
-			) as HTMLUListElement
+			const dropdown = getByTestId(container, 'dropdown') as HTMLUListElement
 			expect(container).toContainElement(dropdown)
 
 			const body = document.body

@@ -19,15 +19,88 @@ export interface ISnowReportData {
 	uppersnow_in: number
 }
 
+export interface Forecast {
+	date: string
+	time: string
+	lowcloud_pct: number
+	lowcloud_min_pct: number
+	lowcloud_max_pct: number
+	lowcloud_avg_pct: number
+	midcloud_pct: number
+	midcloud_min_pct: number
+	midcloud_max_pct: number
+	midcloud_avg_pct: number
+	highcloud_pct: number
+	highcloud_min_pct: number
+	highcloud_max_pct: number
+	highcloud_avg_pct: number
+	totalcloud_pct: number
+	totalcloud_min_pct: number
+	totalcloud_max_pct: number
+	totalcloud_avg_pct: number
+	frzglvl_ft: number
+	frzglvl_min_ft: number
+	frzglvl_max_ft: number
+	frzglvl_avg_ft: number
+	frzglvl_m: number
+	frzglvl_min_m: number
+	frzglvl_max_m: number
+	frzglvl_avg_m: number
+	precip_mm: number
+	precip_in: number
+	rain_mm: number
+	rain_in: number
+	snow_mm: number
+	snow_in: number
+	hum_pct: number
+	hum_min_pct: number
+	hum_max_pct: number
+	hum_avg_pct: number
+	dewpoint_c: number
+	dewpoint_min_c: number
+	dewpoint_max_c: number
+	dewpoint_avg_c: number
+	dewpoint_f: number
+	dewpoint_min_f: number
+	dewpoint_max_f: number
+	dewpoint_avg_f: number
+	vis_km: number
+	vis_min_km: number
+	vis_max_km: number
+	vis_avg_km: number
+	vis_mi: number
+	vis_min_mi: number
+	vis_max_mi: number
+	vis_avg_mi: number
+	slp_mb: number
+	slp_min_mb: number
+	slp_max_mb: number
+	slp_avg_mb: number
+	slp_in: number
+	slp_min_in: number
+	slp_max_in: number
+	slp_avg_in: number
+	base: LevelForecast
+	mid: LevelForecast
+	upper: LevelForecast
+}
+interface IResortForecastData {
+	id: number
+	name: string
+	country: string
+	continent: string
+	forecast: Array<Forecast>
+}
+
 export interface ITodaysForecast {
-	base: Forecast | { wx_desc: string }
-	upper: Forecast | { wx_desc: string }
+	base: LevelForecast | { wx_desc: string }
+	upper: LevelForecast | { wx_desc: string }
 	resortid?: number
 	resortname?: string
 	time?: string
 }
 
-export interface Forecast {
+export interface LevelForecast {
 	feelslike_avg_c: number
 	feelslike_avg_f: number
 	feelslike_c: number

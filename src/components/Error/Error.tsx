@@ -19,9 +19,7 @@ const Error: FunctionComponent<Props> = ({ error }) => {
 		<ErrorStyles>
 			<div data-testid="error">{error.message}</div>
 			{error.response?.status === 500 && (
-				<p data-testid="response-status">
-					Looks like the server is down :(
-				</p>
+				<p data-testid="response-status">Looks like the server is down :(</p>
 			)}
 		</ErrorStyles>
 	)

@@ -18,7 +18,7 @@ const StyledInput = styled.input`
 	color: white;
 	cursor: pointer;
 	font-size: ${(props) => props.theme.fontSizes.fontLrg};
-	max-width: 210px;
+	width: fit-content;
 	@media screen and (max-width: 600px) {
 		font-size: ${(props) => props.theme.fontSizes.fontMed};
 	}
