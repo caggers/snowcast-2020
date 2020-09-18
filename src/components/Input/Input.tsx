@@ -10,11 +10,7 @@ type Props = {
 	handleClickOption: (option: option) => Promise<void>
 }
 
-const Input: FunctionComponent<Props> = ({
-	options,
-	selected,
-	handleClickOption,
-}) => {
+const Input: FunctionComponent<Props> = ({ options, selected, handleClickOption }) => {
 	const ref = useRef<HTMLUListElement | null>(null)
 
 	const [, setFilteredOption] = useState<Array<option> | []>([])
@@ -54,11 +50,7 @@ const Input: FunctionComponent<Props> = ({
 				<Arrow />
 			</InputWrapper>
 			{showDropdown && (
-				<Dropdown
-					onClick={(e) => onClickDropdown(e)}
-					options={options}
-					ref={ref}
-				/>
+				<Dropdown onClick={(e) => onClickDropdown(e)} options={options} ref={ref} />
 			)}
 		</Wrapper>
 	)

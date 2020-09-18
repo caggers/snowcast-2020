@@ -16,9 +16,7 @@ export function getData(
 	interval?: number
 ): Promise<AxiosResponse<ISnowReportData | ITodaysForecast>> {
 	const URL =
-		type === 'snowreport'
-			? `${API}/${type}/${resort_id}?`
-			: `${API}/${type}/${resort_id}`
+		type === 'snowreport' ? `${API}/${type}/${resort_id}?` : `${API}/${type}/${resort_id}`
 	return axios.get(URL, {
 		headers: HEADERS,
 		params: {
@@ -41,30 +39,12 @@ export function buildTextArrayForPanel(
 	text: string
 }> {
 	const newSnow = buildTextObject('New Snow', `${snowReport.newsnow_cm} cm`)
-	const upperMountain = buildTextObject(
-		'Upper Mountain Snow',
-		`${snowReport.uppersnow_cm} cm`
-	)
-	const lowerMountain = buildTextObject(
-		'Lower Mountain Snow',
-		`${snowReport.lowersnow_cm} cm`
-	)
-	const lastSnowedDate = buildTextObject(
-		'Last Snowed Date',
-		`${snowReport.lastsnow}`
-	)
-	const lastSnowedAmount = buildTextObject(
-		'Last Snowed Amount',
-		`${snowReport.lastsnow_cm}`
-	)
-	const reportTime = buildTextObject(
-		'Report Time',
-		`${snowReport.reporttime}`
-	)
-	const reportDate = buildTextObject(
-		'Report Date',
-		`${snowReport.reportdate}`
-	)
+	const upperMountain = buildTextObject('Upper Mountain Snow', `${snowReport.uppersnow_cm} cm`)
+	const lowerMountain = buildTextObject('Lower Mountain Snow', `${snowReport.lowersnow_cm} cm`)
+	const lastSnowedDate = buildTextObject('Last Snowed Date', `${snowReport.lastsnow}`)
+	const lastSnowedAmount = buildTextObject('Last Snowed Amount', `${snowReport.lastsnow_cm}`)
+	const reportTime = buildTextObject('Report Time', `${snowReport.reporttime}`)
+	const reportDate = buildTextObject('Report Date', `${snowReport.reportdate}`)
 
 	return [
 		newSnow,

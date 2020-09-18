@@ -55,12 +55,8 @@ describe('App', () => {
 				},
 			}
 			const mock: jest.SpyInstance = jest.spyOn(axios, 'get')
-			mock.mockImplementationOnce(() =>
-				Promise.resolve(snowReportExpectedResult)
-			)
-			mock.mockImplementationOnce(() =>
-				Promise.resolve(forecastExpectedResult)
-			)
+			mock.mockImplementationOnce(() => Promise.resolve(snowReportExpectedResult))
+			mock.mockImplementationOnce(() => Promise.resolve(forecastExpectedResult))
 		})
 
 		it('renders the App component correctly with a 200 API response', async () => {
@@ -69,9 +65,7 @@ describe('App', () => {
 			const conditions = await findByText('Champagne Skiing!')
 			expect(container).toContainElement(conditions)
 
-			const baseWeather = getByLabelText(
-				'Bottom station weather conditions'
-			)
+			const baseWeather = getByLabelText('Bottom station weather conditions')
 			expect(container).toContainElement(baseWeather)
 		})
 	})
