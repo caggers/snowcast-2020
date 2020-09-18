@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled from 'styled-components'
-// import { text } from '../../types/api'
 
 type Props = {
 	text: string

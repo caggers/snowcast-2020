@@ -4,8 +4,6 @@ import { buildTextArrayForPanel } from '../../util/util'
 import { AxiosError } from 'axios'
 import { ISnowReportData, ServerError, option, text } from '../../types/api'
 import Card from '../Card/Card'
-import Loading from '../Loading/Loading'
-import Error from '../Error/Error'
 
 type Props = {
 	error: AxiosError<ServerError> | undefined
@@ -16,9 +14,7 @@ type Props = {
 }
 
 const Content: FunctionComponent<Props> = ({
-	error,
 	handleClickOption,
-	loading,
 	snowReport,
 	weatherDesc,
 }) => {
