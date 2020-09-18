@@ -56,18 +56,17 @@ const App: FunctionComponent = () => {
 		getResortForecast()
 	}, [resortForecast])
 
-	const [error, setError] = useState<AxiosError<ServerError> | undefined>()
+	const [error, setError] = useState<AxiosError<ServerError> | false>(false)
 	useEffect(() => {
 		snowReport.error ? setError(snowReport.error) : null
 		resortForecast.error ? setError(resortForecast.error) : null
 	}, [snowReport, resortForecast])
 
 	const [loading, setLoading] = useState<boolean>(false)
-	// useEffect(() => {
-	// 	console.log(snowReport.isLoading)
-	// 	snowReport.isLoading ? setLoading(snowReport.isLoading) : null
-	// 	resortForecast.isLoading ? setLoading(resortForecast.isLoading) : null
-	// }, [])
+	useEffect(() => {
+		setLoading(snowReport.isLoading)
+		setLoading(resortForecast.isLoading)
+	}, [resortForecast.isLoading, snowReport.isLoading])
 
 	const handleClickOption = async (option: option) => {
 		setSnowReportID(option.resortid)

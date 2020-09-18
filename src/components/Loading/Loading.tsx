@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const LoadingStyles = styled.div`
 	color: black;
-	margin: 10% auto;
+	margin: 10px auto;
 	width: 600px;
 `
 const Loading: FunctionComponent = () => {
