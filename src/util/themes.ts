@@ -1,6 +1,7 @@
 export const theme = {
 	colors: {
 		lightGray: '#EEEEEE',
+		transparentGrey: 'rgba(238, 238, 238, 0.5)',
 	},
 	fontSizes: {
 		fontXS: '0.75rem',
