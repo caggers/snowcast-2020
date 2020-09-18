@@ -37,7 +37,10 @@ const App: FunctionComponent = () => {
 		setLoading(true)
 		const getSnowReport = async () => {
 			try {
-				const request: AxiosResponse = await getData('snowreport', resortID)
+				const request: AxiosResponse = await getData(
+					'snowreport',
+					resortID
+				)
 				const data: ISnowReportData = request.data
 				setSnowReport(data)
 				setLoading(false)

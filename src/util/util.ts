@@ -30,32 +30,6 @@ export function getData(
 	})
 }
 
-// export function getForecast(
-// 	resort_id: number,
-// 	num_days?: number,
-// 	interval?: number
-// ): Promise<AxiosResponse<ITodaysForecast>> {
-// 	const URL = `${API}/resortforecast/${resort_id}`
-// 	return axios.get(URL, {
-// 		headers: HEADERS,
-// 		params: {
-// 			num_of_days: num_days,
-// 			hourly_interval: interval,
-// 			app_id: APP_ID,
-// 			app_key: APP_KEY,
-// 		},
-// 	})
-// }
-
-export async function buildContext() {
-	return {
-		222036: await getData('snowreport', 222036),
-		222013: await getData('snowreport', 222013),
-		222023: await getData('snowreport', 222023),
-		222018: await getData('snowreport', 222018),
-	}
-}
-
 function buildTextObject(label: string, text: string) {
 	return { label: label, text: text }
 }
@@ -83,8 +57,14 @@ export function buildTextArrayForPanel(
 		'Last Snowed Amount',
 		`${snowReport.lastsnow_cm}`
 	)
-	const reportTime = buildTextObject('Report Time', `${snowReport.reporttime}`)
-	const reportDate = buildTextObject('Report Date', `${snowReport.reportdate}`)
+	const reportTime = buildTextObject(
+		'Report Time',
+		`${snowReport.reporttime}`
+	)
+	const reportDate = buildTextObject(
+		'Report Date',
+		`${snowReport.reportdate}`
+	)
 
 	return [
 		newSnow,

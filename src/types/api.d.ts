@@ -1,3 +1,5 @@
+import { AxiosError, AxiosRequestConfig } from 'axios'
+
 export interface ISnowReportData {
 	conditions: string
 	lastsnow: string
@@ -86,10 +88,10 @@ export type text = {
 }
 
 export interface ServerError {
-	config?: any
+	config?: AxiosRequestConfig
 	data?: { message: string }
 	headers?: any
-	request?: XMLHttpRequest | any
+	request?: XMLHttpRequest
 	status?: number
 	statusText?: string
 }

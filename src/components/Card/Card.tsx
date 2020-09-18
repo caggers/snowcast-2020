@@ -81,7 +81,10 @@ const Card: FunctionComponent<Props> = ({
 
 					<GridRow3>
 						<Text text={snowReport.conditions} label="Status" />
-						<Text text={percentageOpen} label="Percentage of the runs open" />
+						<Text
+							text={percentageOpen}
+							label="Percentage of the runs open"
+						/>
 					</GridRow3>
 
 					<GridCol3>

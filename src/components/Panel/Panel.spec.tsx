@@ -23,5 +23,7 @@ describe('Panel', () => {
 				<Panel panelText={props.panelText} />
 			</ThemeProvider>
 		)
+
+		expect(container).toBeInTheDocument()
 	})
 })

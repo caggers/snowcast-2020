@@ -29,6 +29,7 @@ const StyledDropdown = styled.ul`
 		font-size: ${(props) => props.theme.fontSizes.fontMed};
 	}
 `
+StyledDropdown.displayName = 'StyledDropdown'
 
 const Dropdown = forwardRef<Ref, DropdownProps>(({ options, onClick }, ref) => {
 	useEffect(() => {
