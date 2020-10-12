@@ -64,8 +64,11 @@ const App: FunctionComponent = () => {
 
 	const [loading, setLoading] = useState<boolean>(false)
 	useEffect(() => {
-		setLoading(snowReport.isLoading)
-		setLoading(resortForecast.isLoading)
+		if (snowReport.isLoading || resortForecast.isLoading) {
+			setLoading(true)
+		} else {
+			setLoading(false)
+		}
 	}, [resortForecast.isLoading, snowReport.isLoading])
 
 	const handleClickOption = async (option: option) => {
